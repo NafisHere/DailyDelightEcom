@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'userauths',
     #payment integration
     'paypal.standard.ipn',
-    'bkash',
-    'bKash_payment',
+    # 'bkash',
+    # 'bKash_payment',
 
 ]
 
