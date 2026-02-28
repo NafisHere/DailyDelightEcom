@@ -27,10 +27,10 @@ CSRF_COOKIE_SAMESITE = 'Strict'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
+        'NAME': config('DB_NAME', default=''),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default=''),
         'PORT': config('DB_PORT', default='5432'),
     }
 }
@@ -48,16 +48,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # Payment settings for production
-BKASH = {
-    'app_key': config('BKASH_APP_KEY'),
-    'app_secret': config('BKASH_APP_SECRET'),
-    'username': config('BKASH_USERNAME'),
-    'password': config('BKASH_PASSWORD'),
-    'sandbox': False  # Set to False for production
-}
+# BKASH = {
+#     'app_key': config('BKASH_APP_KEY', default=''),
+#     'app_secret': config('BKASH_APP_SECRET', default=''),
+#     'username': config('BKASH_USERNAME', default=''),
+#     'password': config('BKASH_PASSWORD', default=''),
+#     'sandbox': config('BKASH_SANDBOX', default=True, cast=bool)
+# }
 
-PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL')
-PAYPAL_TEST = False
+PAYPAL_RECEIVER_EMAIL = config('PAYPAL_RECEIVER_EMAIL', default='')
+PAYPAL_TEST = config('PAYPAL_TEST', default=True, cast=bool)
 
 # Add Whitenoise middleware for static files
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
