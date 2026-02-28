@@ -1,0 +1,23 @@
+services:
+  # Web Service
+  - type: web
+    name: ecomprj
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn ecomprj.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: ecomprj.production
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    autoDeploy: true
+    
+  # PostgreSQL Database
+  - type: pserv
+    name: ecomprj-db
+    env: postgres
+    plan: free
+    user: ecomprj_user
+    database: ecomprj_db
+    ipAllowList: []
